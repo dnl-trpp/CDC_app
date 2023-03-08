@@ -1,0 +1,6 @@
+services:
+  warehouse_api:
+    build: ./warehouse_api
+    hostname: warehouse_api
+    ports:
+      - 8000:8000
