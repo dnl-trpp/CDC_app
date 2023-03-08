@@ -4,3 +4,9 @@ services:
     hostname: warehouse_api
     ports:
       - 8000:8000
+
+  catalog_api:
+    build: ./catalog_api
+    hostname: catalog_api
+    ports:
+      - 8001:8000
