@@ -10,3 +10,18 @@ services:
     hostname: catalog_api
     ports:
       - 8001:8000
+  db:
+   image: mysql:5.7
+   hostname: db
+   ports:
+     - "32000:3306"
+   environment:
+     MYSQL_ROOT_PASSWORD: root
+   volumes:
+     - ./db:/docker-entrypoint-initdb.d/:ro
+  
+volumes: 
+  db:
+    driver: local
+
+
