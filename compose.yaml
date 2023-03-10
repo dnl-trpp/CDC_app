@@ -10,6 +10,13 @@ services:
     hostname: catalog_api
     ports:
       - 8001:8000
+
+  purchase_refund_api:
+    build: ./purchase_refund_api
+    hostname: purchase_refund_api
+    ports:
+      - 8002:8000
+
   db:
    image: mysql:5.7
    hostname: db
