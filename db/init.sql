@@ -32,7 +32,7 @@ INSERT INTO orders(id, date, customer_name, customer_email, customer_phone, tota
 
 DROP TABLE IF EXISTS products;
 CREATE TABLE products (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` text,
   `description` text,
   `category` text,
