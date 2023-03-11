@@ -3,9 +3,9 @@
 ## Team Members
 
 The team is composed by:
-- Carlo Carugno 
-- Daniel Trippa  
-- Christian Tedesco 
+- Carlo Carugno 1999815 
+- Daniel Trippa 1837561
+- Christian Tedesco 2025232
 
 ## Main Idea
 CDC shop is a distributed system that handles the management, the payment and the shipment of products: in particular for materials that you can usually find in an hardware store.
@@ -28,8 +28,34 @@ There are basically three entities in the system:
 - ***Shipper Interface***: interface that allows the communication between the shipper and the shipping service
 ## Architecture
 <div>
-   <img src="architecture.png" width=80% style="display:inline-block; margin-right: 2%;"/>
+   <img src="images/architecture.png" width=60% style="display:inline-block; margin-right: 2%;"/>
 </div>
+
+## DB Structure
+***order_items***:
+| ***id*** | order_id | product_id | quantity | price |
+| --- | --- | --- | --- | --- |
+
+***orders***:
+| ***id*** | date | customer_name | customer_email | customer_phone | total_price | paid | status |
+| --- | -------- | ---------- | -------- | ----- | ----- | ----- | ----- |
+
+***products***:
+| ***id*** | name | description | category | price | stock | image_url |
+| --- | -------- | ---------- | -------- | ----- | ----- | ----- |
+
+***purchase_items***:
+| ***id*** | purchase_id | prod_id | quantity | price |
+| --- | -------- | ---------- | -------- | ----- |
+
+***purchases:***
+| ***id*** | date | supplier_id | total_price |
+| --- | -------- | ---------- | -------- |
+
+***suppliers***:
+| ***id*** | name | address | email | phone |
+| --- | ---- | --- | -------- | ----- |
+
 ## Warehouse api documentation
 
 * GET /products
