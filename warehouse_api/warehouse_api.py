@@ -18,7 +18,7 @@ def connectDb():
 
 
 @server.route('/products',methods=['POST'])
-def main():
+def addProduct():
 
     data = request.get_json(force=True,silent=True)
     if data == None:
@@ -45,10 +45,76 @@ def main():
 
     db.commit()
 
+    id = cursor.lastrowid
     cursor.close()
     db.close()
-    return "OK",200
+    return str(id),200
 
+
+@server.route('/products',methods=['GET'])
+def getAllProducts():
+
+    args = request.args
+    query = """SELECT * FROM products"""
+
+
+    if "name" in args:
+        query += """ WHERE name LIKE '%{name}%'""".format(name = args['name'])
+        
+    if "orderby" in args:
+        query += " ORDER BY price {order}".format(order=args['orderby'])
+
+    if "limit" in args:
+        query += """ LIMIT {l}""".format(l=args["limit"])
+    
+
+    db = connectDb()
+    cursor = db.cursor()
+
+    cursor.execute(query)
+    row_headers=[x[0] for x in cursor.description] #this will extract row headers
+    rv = cursor.fetchall()
+
+    json_data=[]
+    for result in rv:
+        json_data.append(dict(zip(row_headers,result)))
+
+    cursor.close()
+    db.close()
+    return json.dumps(json_data)
+
+@server.route('/products/<int:id>',methods=['GET'])
+def getProduct(id):
+
+    query = """SELECT * FROM products WHERE id={id}""".format(id=id)
+    db = connectDb()
+    cursor = db.cursor()
+
+    cursor.execute(query)
+    row_headers=[x[0] for x in cursor.description] #this will extract row headers
+    rv = cursor.fetchall()
+
+    json_data=[]
+    for result in rv:
+        json_data.append(dict(zip(row_headers,result)))
+
+    cursor.close()
+    db.close()
+    return json.dumps(json_data)
+
+@server.route('/products/<int:id>',methods=['DELETE'])
+def deleteProduct(id):
+
+    query = """DELETE FROM products WHERE id={id}""".format(id=id)
+    db = connectDb()
+    cursor = db.cursor()
+
+    cursor.execute(query)
+
+    db.commit()
+    cursor.close()
+    db.close()
+    return "OK", 200
 
 if __name__ == '__main__':
     server.run()
