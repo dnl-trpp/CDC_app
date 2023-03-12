@@ -20,7 +20,7 @@ def connectDb():
 @server.route('/products',methods=['POST'])
 def addProduct():
 
-    data = request.get_json(force=True,silent=True)
+    data = request.form
     if data == None:
         return "Bad Request",400
 
@@ -60,7 +60,7 @@ def getAllProducts():
 
     if "name" in args:
         query += """ WHERE name LIKE '%{name}%'""".format(name = args['name'])
-        
+
     if "orderby" in args:
         query += " ORDER BY price {order}".format(order=args['orderby'])
 
