@@ -13,7 +13,7 @@ CDC shop is a distributed system that handles the management, the payment and th
 ## User Stories
 As a generic user:
 1. I want to login/logout
-2. I want see the list of products
+2. I want to see the list of products
 
 As a customer:
 1. I want to see my current shopping cart
