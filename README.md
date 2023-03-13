@@ -10,6 +10,27 @@ The team is composed by:
 ## Main Idea
 CDC shop is a distributed system that handles the management, the payment and the shipment of products: in particular for materials that you can usually find in an hardware store.
 
+## User Stories
+As a customer:
+1. I want to see the list of products
+2. I want to see my current shopping cart
+3. I want to order the products for ascending/descending price
+4. I want to retrieve a product by giving its name
+5. I want to check my order to see where is my package
+6. I want to do the payment for current shopping cart
+
+As a Merchant:
+1. I want to insert/remove products
+2. I want to change the price of a product
+3. I want to see the list of products
+4. I want to order the products for ascending/descending price
+5. I want to retrieve a product by giving name
+
+As a shipper:
+1. I want to receive the list of pending orders
+2. I want to update the pending orders once I ship them
+3. I want to remove the items shipped from the list of products
+
 ## Entities
 There are basically three entities in the system:
 - ***Merchant***: that handles the products, he can add, remove or modify products in the system.
