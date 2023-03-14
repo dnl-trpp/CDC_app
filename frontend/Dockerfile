@@ -12,6 +12,8 @@ COPY package.json .
 COPY package-lock.json .
 RUN npm ci
 RUN npm install react-scripts@5.0.1 -g --silent
+RUN npm install react-router-dom
+RUN npm install bootstrap
 
 # start app
 CMD ["npm", "start"]

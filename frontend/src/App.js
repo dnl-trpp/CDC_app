@@ -1,38 +1,33 @@
 import "./App.css";
-import Messages from "./components/Messages";
-import TextField from "./components/TextField";
-import { useEffect, useState } from "react";
+
+import Products from "./components/Products";
+import Home from "./components/Home";
+import Merchant from "./components/Merchant";
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
-  const [messages, setMessages] = useState([]);
 
-
-  useEffect(() => {
-    fetch(`${process.env.REACT_APP_BACKEND_SERVICE_URL}/products`)
-      .then((response) => response.json())
-      .then((responseData) => {
-        console.log(responseData)
-        setMessages(responseData);
-      });
-  }, []);
-
-
+  
   return (
+   
     <div className="App">
-      {messages.length !== 0 ? (
-        <div>
-        <p>{messages[0].name}</p>
-        <p>{messages[1].name}</p>
-        <p>{messages[2].name}</p>
-        <p>{messages[3].name}</p>
-        <p>{messages[4].name}</p>
-        <p>{messages[5].name}</p>
-        </div>
-      ) : (
-        <p>No Messages</p>
-      )}
+      <BrowserRouter>
+      
+      <Routes>
+        <Route path="/" element={<Home/>} />
+        <Route path="/merchants" element={<Merchant/>} />
+        <Route path="/products" element={<Products/>} />
+      </Routes>
+    
+    </BrowserRouter>
+
     </div>
+    
+    
   );
+    
+  
 }
 
 export default App;
