@@ -32,14 +32,14 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     volumes:
-      - "./frontend:/usr/src/chat-app"
-      - "/usr/src/chat-app/node_modules"
+      - "./frontend:/usr/src/admin"
+      - "/usr/src/admin/node_modules"
+    hostname: admin_interface
     ports:
       - 3000:3000
     environment:
       - NODE_ENV=development
       - REACT_APP_BACKEND_SERVICE_URL=http://localhost:8000
-      - REACT_APP_WEBSOCKET_SERVICE_URL=http://localhost:8000
   
 volumes: 
   db:
