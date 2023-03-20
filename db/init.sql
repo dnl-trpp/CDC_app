@@ -1,6 +1,19 @@
 CREATE DATABASE IF NOT EXISTS CDC;
 USE CDC;
 
+DROP TABLE IF EXISTS users;
+CREATE TABLE users (
+  `id` int NOT NULL,
+  `name` text,
+  `email` text,
+  `phone` text,
+  `password` text,
+  PRIMARY KEY (`id`)
+);
+
+INSERT INTO users(id, name, email, phone, password) VALUES (1,'John Doe','johndoe@gmail.com','555-1234','passwd'),(2,'Jane Smith','janesmith@gmail.com','555-5678','passwd'),(3,'Bob Johnson','bobjohnson@yahoo.com','555-2468','passwd'),(4,'Alice Lee','alicelee@hotmail.com','555-7890','pass');
+
+
 DROP TABLE IF EXISTS order_items;
 CREATE TABLE order_items (
   `id` int NOT NULL,
@@ -15,6 +28,17 @@ CREATE TABLE order_items (
 
 INSERT INTO order_items(id, order_id, product_id, quantity, price) VALUES (1,1,2,2,40),(2,1,4,1,200),(3,2,1,5,50),(4,2,3,3,45),(5,3,5,4,80),(6,4,2,1,20),(7,4,4,2,100),(8,5,1,10,100),(9,5,3,5,75),(10,5,5,2,40),(11,6,2,3,30),(12,6,4,4,160),(13,7,1,8,80),(14,7,3,2,30),(15,8,5,1,20),(16,8,2,2,20),(17,9,2,4,40),(18,9,3,3,45),(19,10,1,3,30),(20,10,3,1,15);
 
+DROP TABLE IF EXISTS cart;
+CREATE TABLE cart (
+  `id` int NOT NULL,
+  `user_id` int DEFAULT NULL,
+  `product_id` int DEFAULT NULL,
+  `quantity` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+INSERT INTO cart(id, user_id, product_id, quantity) VALUES (1,1,1,2),(2,1,2,3);
+
 DROP TABLE IF EXISTS orders;
 CREATE TABLE orders (
   `id` int NOT NULL,
@@ -28,7 +52,7 @@ CREATE TABLE orders (
   PRIMARY KEY (`id`)
 );
 
-INSERT INTO orders(id, date, customer_name, customer_email, customer_phone, total_price, paid, status) VALUES (1,'2022-01-01','John Doe','johndoe@gmail.com','555-1234',100.5,1,'delivered'),(2,'2022-01-02','Jane Smith','janesmith@gmail.com','555-5678',75.25,1,'shipped'),(3,'2022-01-03','Bob Johnson','bobjohnson@yahoo.com','555-2468',50,0,'pending'),(4,'2022-01-04','Alice Lee','alicelee@hotmail.com','555-7890',80.75,1,'shipped'),(5,'2022-01-05','Mark Brown','markbrown@gmail.com','555-1357',110,1,'delivered'),(6,'2022-01-06','Susan Kim','susankim@yahoo.com','555-5793',25,1,'delivered'),(7,'2022-01-07','David Chen','davidchen@hotmail.com','555-2468',60.5,0,'pending'),(8,'2022-01-08','Mary Davis','marydavis@gmail.com','555-7890',45.75,0,'pending'),(9,'2022-01-09','James Lee','jameslee@yahoo.com','555-1234',90.25,1,'shipped'),(10,'2022-01-10','Kelly Smith','kellysmith@hotmail.com','555-5678',75,1,'delivered'),(11,'2022-01-11','Michael Brown','michaelbrown@gmail.com','555-1357',60.5,1,'shipped'),(12,'2022-01-12','Lisa Kim','lisakim@yahoo.com','555-5793',40,0,'pending'),(13,'2022-01-13','Robert Chen','robertchen@hotmail.com','555-2468',85.75,0,'pending'),(14,'2022-01-14','Samantha Davis','samanthadavis@gmail.com','555-7890',120.25,1,'delivered'),(15,'2022-01-15','William Lee','williamlee@yahoo.com','555-1234',95,1,'delivered'),(16,'2022-01-16','Emily Smith','emilysmith@hotmail.com','555-5678',70.5,1,'shipped'),(17,'2022-01-17','Christopher Brown','christopherbrown@gmail.com','555-1357',55.25,0,'pending'),(18,'2022-01-18','Natalie Kim','nataliekim@yahoo.com','555-5793',30,1,'delivered');
+INSERT INTO orders(id, date, customer_name, customer_email, customer_phone, total_price, paid, status) VALUES (1,'2022-01-01','John Doe','johndoe@gmail.com','555-1234',100.5,1,'pending'),(2,'2022-01-02','Jane Smith','janesmith@gmail.com','555-5678',75.25,1,'shipped'),(3,'2022-01-03','Bob Johnson','bobjohnson@yahoo.com','555-2468',50,0,'pending'),(4,'2022-01-04','Alice Lee','alicelee@hotmail.com','555-7890',80.75,1,'shipped'),(5,'2022-01-05','Mark Brown','markbrown@gmail.com','555-1357',110,1,'delivered'),(6,'2022-01-06','Susan Kim','susankim@yahoo.com','555-5793',25,1,'delivered'),(7,'2022-01-07','David Chen','davidchen@hotmail.com','555-2468',60.5,0,'pending'),(8,'2022-01-08','Mary Davis','marydavis@gmail.com','555-7890',45.75,0,'pending'),(9,'2022-01-09','James Lee','jameslee@yahoo.com','555-1234',90.25,1,'shipped'),(10,'2022-01-10','Kelly Smith','kellysmith@hotmail.com','555-5678',75,1,'delivered'),(11,'2022-01-11','Michael Brown','michaelbrown@gmail.com','555-1357',60.5,1,'shipped'),(12,'2022-01-12','Lisa Kim','lisakim@yahoo.com','555-5793',40,0,'pending'),(13,'2022-01-13','Robert Chen','robertchen@hotmail.com','555-2468',85.75,0,'pending'),(14,'2022-01-14','Samantha Davis','samanthadavis@gmail.com','555-7890',120.25,1,'delivered'),(15,'2022-01-15','William Lee','williamlee@yahoo.com','555-1234',95,1,'delivered'),(16,'2022-01-16','Emily Smith','emilysmith@hotmail.com','555-5678',70.5,1,'shipped'),(17,'2022-01-17','Christopher Brown','christopherbrown@gmail.com','555-1357',55.25,0,'pending'),(18,'2022-01-18','Natalie Kim','nataliekim@yahoo.com','555-5793',30,1,'delivered');
 
 DROP TABLE IF EXISTS products;
 CREATE TABLE products (
@@ -42,7 +66,7 @@ CREATE TABLE products (
   PRIMARY KEY (`id`)
 );
 
-INSERT INTO products(id, name, description, category, price, stock, image_url) VALUES (1,'Hammer','\"Heavy-duty hammer for construction use.\"','Hand Tools',20,50,'https://example.com/hammer.jpg'),(2,'Screwdriver','\"Set of 4 screwdrivers for various types of screws.\"','Hand Tools',15,30,'https://example.com/screwdriver.jpg'),(3,'Drill','\"Powerful drill for drilling through metal and wood.\"','Power Tools',100,10,'https://example.com/drill.jpg'),(4,'Safety Vest','\"High-visibility safety vest for construction workers.\"','Safety Equipment',25,100,'https://example.com/vest.jpg'),(5,'Welding Mask','\"Protective mask for welding operations.\"','Safety Equipment',50,20,'https://example.com/mask.jpg'),(6,'Toolbox','\"Sturdy toolbox for carrying tools.\"','Tool Storage',30,5,'https://example.com/toolbox.jpg'),(7,'Pliers','\"Set of 3 pliers for various uses.\"','Hand Tools',18,25,'https://example.com/pliers.jpg'),(8,'Saw','\"Circular saw for cutting wood and metal.\"','Power Tools',120,8,'https://example.com/saw.jpg'),(9,'Hard Hat','\"Protective hard hat for construction workers.\"','Safety Equipment',20,50,'https://example.com/hardhat.jpg'),(10,'Screw Set','\"Set of 200 screws of various sizes.\"','Hardware',10,100,'https://example.com/screws.jpg'),(11,'Power Strip','\"Power strip with 6 outlets for multiple devices.\"','Electrical',25,15,'https://example.com/powerstrip.jpg'),(12,'Tape Measure','\"25-foot tape measure for accurate measurements.\"','Hand Tools',12,40,'https://example.com/tapemeasure.jpg'),(13,'Paint Brush','\"Set of 4 paint brushes for different paint types.\"','Painting Supplies',18,20,'https://example.com/paintbrushes.jpg'),(14,'Sander','\"Electric sander for smoothing surfaces.\"','Power Tools',80,12,'https://example.com/sander.jpg'),(15,'Level','\"48-inch level for precise leveling.\"','Hand Tools',25,30,'https://example.com/level.jpg'),(16,'Router','\"Powerful router for shaping wood and metal.\"','Power Tools',150,6,'https://example.com/router.jpg'),(17,'Light Bulbs','\"Set of 10 LED light bulbs for energy efficiency.\"','Electrical',20,25,'https://example.com/lightbulbs.jpg'),(18,'Chainsaw','\"Gas-powered chainsaw for cutting trees and wood.\"','Power Tools',250,5,'https://example.com/chainsaw.jpg'),(19,'Extension Cord','\"25-foot extension cord for powering devices further away.\"','Electrical',15,20,'https://example.com/extensioncord.jpg'),(20,'Gloves','\"Set of 5 work gloves for hand protection.\"','Safety Equipment',30,15,'https://example.com/gloves.jpg');
+INSERT INTO products(id, name, description, category, price, stock, image_url) VALUES (1,'Hammer','Heavy-duty hammer for construction use.','Hand Tools',20,50,'https://example.com/hammer.jpg'),(2,'Screwdriver','Set of 4 screwdrivers for various types of screws.','Hand Tools',15,30,'https://example.com/screwdriver.jpg'),(3,'Drill','Powerful drill for drilling through metal and wood.','Power Tools',100,10,'https://example.com/drill.jpg'),(4,'Safety Vest','High-visibility safety vest for construction workers.','Safety Equipment',25,100,'https://example.com/vest.jpg'),(5,'Welding Mask','Protective mask for welding operations.','Safety Equipment',50,20,'https://example.com/mask.jpg'),(6,'Toolbox','Sturdy toolbox for carrying tools.','Tool Storage',30,5,'https://example.com/toolbox.jpg'),(7,'Pliers','Set of 3 pliers for various uses.','Hand Tools',18,25,'https://example.com/pliers.jpg'),(8,'Saw','Circular saw for cutting wood and metal.','Power Tools',120,8,'https://example.com/saw.jpg'),(9,'Hard Hat','Protective hard hat for construction workers.','Safety Equipment',20,50,'https://example.com/hardhat.jpg'),(10,'Screw Set','Set of 200 screws of various sizes.','Hardware',10,100,'https://example.com/screws.jpg'),(11,'Power Strip','Power strip with 6 outlets for multiple devices.','Electrical',25,15,'https://example.com/powerstrip.jpg'),(12,'Tape Measure','25-foot tape measure for accurate measurements.','Hand Tools',12,40,'https://example.com/tapemeasure.jpg'),(13,'Paint Brush','Set of 4 paint brushes for different paint types.','Painting Supplies',18,20,'https://example.com/paintbrushes.jpg'),(14,'Sander','Electric sander for smoothing surfaces.','Power Tools',80,12,'https://example.com/sander.jpg'),(15,'Level','48-inch level for precise leveling.','Hand Tools',25,30,'https://example.com/level.jpg'),(16,'Router','Powerful router for shaping wood and metal.','Power Tools',150,6,'https://example.com/router.jpg'),(17,'Light Bulbs','Set of 10 LED light bulbs for energy efficiency.','Electrical',20,25,'https://example.com/lightbulbs.jpg'),(18,'Chainsaw','Gas-powered chainsaw for cutting trees and wood.','Power Tools',250,5,'https://example.com/chainsaw.jpg'),(19,'Extension Cord','25-foot extension cord for powering devices further away.','Electrical',15,20,'https://example.com/extensioncord.jpg'),(20,'Gloves','Set of 5 work gloves for hand protection.','Safety Equipment',30,15,'https://example.com/gloves.jpg');
 
 
 DROP TABLE IF EXISTS purchase_items;
