@@ -2,10 +2,12 @@ import "./App.css";
 
 
 import Products from "./components/Products";
-import Home from "./components/Home";
-import Merchant from "./components/Merchant";
+
+import Home from "./pages/Home";
+import Merchant from "./pages/Merchant";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 
 
 function App() {
@@ -23,6 +25,7 @@ function App() {
         <Route path="/" element={<Home/>} />
         <Route path="/merchants" element={<Merchant/>} />
         <Route path="/products" element={<Products/>} />
+        
       </Routes>
     
     </BrowserRouter>

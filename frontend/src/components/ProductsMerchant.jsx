@@ -1,14 +1,20 @@
+import * as React from 'react';
+
+
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import AddProduct from "./AddProduct";
 
 
 
-const Products = () => {
+const ProductsMerchant = () => {
   const [products, setProducts] = useState([]);
-  
+ 
+
   const [loading] = useState(false);
 
 
@@ -33,25 +39,25 @@ const Products = () => {
 const Loading = () => {
     return (
       <>
-        <div className="col-12 py-5 text-center">
+        <div class="col-12 py-5 text-center">
           <Skeleton height={40} width={560} />
         </div>
-        <div className="col-md-4 col-sm-6 col-xs-8 col-12 mb-4">
+        <div class="col-md-4 col-sm-6 col-xs-8 col-12 mb-4">
           <Skeleton height={592} />
         </div>
-        <div className="col-md-4 col-sm-6 col-xs-8 col-12 mb-4">
+        <div class="col-md-4 col-sm-6 col-xs-8 col-12 mb-4">
           <Skeleton height={592} />
         </div>
-        <div className="col-md-4 col-sm-6 col-xs-8 col-12 mb-4">
+        <div class="col-md-4 col-sm-6 col-xs-8 col-12 mb-4">
           <Skeleton height={592} />
         </div>
-        <div className="col-md-4 col-sm-6 col-xs-8 col-12 mb-4">
+        <div class="col-md-4 col-sm-6 col-xs-8 col-12 mb-4">
           <Skeleton height={592} />
         </div>
-        <div className="col-md-4 col-sm-6 col-xs-8 col-12 mb-4">
+        <div class="col-md-4 col-sm-6 col-xs-8 col-12 mb-4">
           <Skeleton height={592} />
         </div>
-        <div className="col-md-4 col-sm-6 col-xs-8 col-12 mb-4">
+        <div class="col-md-4 col-sm-6 col-xs-8 col-12 mb-4">
           <Skeleton height={592} />
         </div>
       </>
@@ -76,19 +82,17 @@ const Loading = () => {
                   <h5 class="card-title">
                     {product.name}
                   </h5>
-                  <p class="card-text">
-                    {product.description.substring(0, 90)}...
-                  </p>
                 </div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item lead">$ {product.price}</li>
-                </ul>
+            
                 <div class="card-body">
                   <Link to={"/product/" + product.id} class="btn btn-dark m-1">
-                    Buy Now
+                    Details
                   </Link>
                   <button class="btn btn-dark m-1">
-                    Add to Cart
+                    Update
+                  </button>
+                  <button class="btn btn-dark m-1">
+                    Remove
                   </button>
                 </div>
               </div>
@@ -99,14 +103,29 @@ const Loading = () => {
       </>
     );
   };
+ 
+  
   return (
     <>
-      <div class="container my-3 py-3">
+      <div className="container my-3 py-3">
         <div class="row">
-          <div class="col-12">
-            <h2 class="display-5 text-center">Products</h2>
+            <div className="col-4">
+            <select className="form-select m-2" defaultValue={"default"} >
+                <option value="default" disabled>Sort by</option>
+                <option>Price - Lowest to Highest</option>
+                <option>Price - Highest to Lowest</option>
+                <option>Alphabet - A-Z</option>
+                <option>Alphabet - Z-A</option>
+            </select>
+            </div>
+            
+            
+            <div className="col-4 ">
+                <AddProduct />
+            </div>
+            
             <hr />
-          </div>
+          
         </div>
         <div class="row justify-content-center">
           {loading ? <Loading /> : <ShowProducts />}
@@ -118,5 +137,4 @@ const Loading = () => {
 
 
 
-export default Products;
-
+export default ProductsMerchant;
