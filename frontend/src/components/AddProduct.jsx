@@ -14,43 +14,46 @@ const AddProduct = () => {
     const [message, setMessage] = useState("");
     
   
-   let handleSubmit =  (e) => {
-        e.preventDefault();
-        try {
-          let res = fetch("https://localhost:8000/products", {
-            method: "POST",
-            body: JSON.stringify({
-              name: name,
-              description: description,
-              category: category,
-              price: price,
-              stock: stock,
-              image_url: image_url,
-            }),
-          });
-          res.json();
-          if (res.status === 200) {
-            setName("");
-            setDescription("");
-            setCategory("");
-            setPrice("");
-            setStock("");
-            setImageUrl("");
-            setMessage("Product added successfully");
-          } else {
-            setMessage("Some error occured");
-          }
-        } catch (err) {
-          console.log(err);
+   
+    const handleSubmit =  (e) => {
+      e.preventDefault();
+      try {
+        let res = fetch("http://localhost:8000/products", {
+          method: "POST",
+          
+          body: JSON.stringify({
+            name: name,
+            description: description,
+            category: category,
+            price: price,
+            stock: stock,
+            image_url: image_url,
+          }),
+        });
+        res.json();
+        if (res.status === 200) {
+          setName("");
+          setDescription("");
+          setCategory("");
+          setPrice("");
+          setStock("");
+          setImageUrl("");
+          setMessage("Product added successfully");
+          
+        } else{
+          setMessage("Some error occured");
         }
-      };
+
+      } 
+      catch (err) {
+        console.log(err);
+      }
+    };
 
 
     return (
       
-     
       <>
-      
       
       <button type="button" class="btn btn-dark m-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Add Product
@@ -84,7 +87,7 @@ const AddProduct = () => {
                     <div class="form-group">
                         <label class="control-label">Category</label>
                         <div>
-                        <input type="number" class="form-control " placeholder="Category" value={category} onChange={(e) => setCategory(e.target.value)}></input>
+                        <input type="text" class="form-control " placeholder="Category" value={category} onChange={(e) => setCategory(e.target.value)}></input>
                         </div>
                     </div>
                     <div class="form-group">
@@ -110,7 +113,7 @@ const AddProduct = () => {
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary" >Add</button>
+              <button type="button" class="btn btn-primary" onClick={(e) => handleSubmit(e)}>Add</button>
             </div>
           </div>
         </div>

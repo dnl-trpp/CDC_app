@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link  } from "react-router-dom";
+
 
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
@@ -33,6 +34,7 @@ const Products = () => {
 const Loading = () => {
     return (
       <>
+      
         <div className="col-12 py-5 text-center">
           <Skeleton height={40} width={560} />
         </div>
@@ -101,9 +103,11 @@ const Loading = () => {
   };
   return (
     <>
+    
       <div class="container my-3 py-3">
         <div class="row">
           <div class="col-12">
+          
             <h2 class="display-5 text-center">Products</h2>
             <hr />
           </div>
