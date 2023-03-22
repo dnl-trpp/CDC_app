@@ -21,7 +21,7 @@ def connectDb():
 @server.route('/products',methods=['POST'])
 def addProduct():
 
-    data = request.form
+    data = request.get_json(force=True,silent=True)
     if data == None:
         return "Bad Request",400
 
