@@ -4,6 +4,8 @@ import { useState } from "react";
 
 
 
+
+
 const AddProduct = () => {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
@@ -11,7 +13,7 @@ const AddProduct = () => {
     const [price, setPrice] = useState("");
     const [stock, setStock] = useState("");
     const [image_url, setImageUrl] = useState("");
-    const [message, setMessage] = useState("");
+    
     
   
    
@@ -29,16 +31,19 @@ const AddProduct = () => {
             image_url: image_url,
           })
         })
-        .then(response => response.json())
-        .then(setName(""))
-        .then(setDescription(""))
-        .then(setCategory(""))
-        .then(setPrice(""))
-        .then(setStock(""))
-        .then(setImageUrl(""))
-        .then(setMessage("Product Added"))
+        .then((response) => {
+          if (response.status === 200) {
+            setName("");
+            setDescription("");
+            setCategory("");
+            setPrice("");
+            setStock("");
+            setImageUrl("");
+            alert("Product added successfully");
+            window.location.reload();
+          }
+        })
         .catch(error => console.log(error))
-        window.location.reload();//perchè volevo che al click aggiornasse la pagina per visualizzare il nuovo prodotto
     };
 
 
@@ -99,12 +104,11 @@ const AddProduct = () => {
                         <input type="text" class="form-control " placeholder="Image_url" value={image_url} onChange={(e) => setImageUrl(e.target.value)}></input>
                         </div>
                     </div>
-                    <div class="message">{message ? <p>{message}</p> : null}</div>
             </form>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" onClick={(e) => handleSubmit(e)}>Add</button>
+              <button type="button" class="btn btn-primary" onClick={(e) => handleSubmit(e)} data-bs-dismiss="modal">Add</button>
             </div>
           </div>
         </div>

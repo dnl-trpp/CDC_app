@@ -1,10 +1,6 @@
 import * as React from 'react';
-
-
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-
-
+import  {Link} from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import AddProduct from "./AddProduct";
@@ -35,6 +31,7 @@ const ProductsMerchant = () => {
     getProducts();
     
   },[]);
+
 
 const Loading = () => {
     return (
@@ -85,15 +82,9 @@ const Loading = () => {
                 </div>
             
                 <div class="card-body">
-                  <Link to={"/product/" + product.id} class="btn btn-dark m-1">
+                  <Link to={"/warehouse/" + product.id} class="btn btn-dark m-1">
                     Details
                   </Link>
-                  <button class="btn btn-dark m-1">
-                    Update
-                  </button>
-                  <button class="btn btn-dark m-1">
-                    Remove
-                  </button>
                 </div>
               </div>
             </div>
@@ -107,10 +98,10 @@ const Loading = () => {
   
   return (
     <>
-      <div className="container my-3 py-3">
+      <div class="container my-3 py-3">
         <div class="row">
-            <div className="col-4">
-            <select className="form-select m-2" defaultValue={"default"} >
+            <div class="col-4">
+            <select class="form-select m-2" defaultValue={"default"} >
                 <option value="default" disabled>Sort by</option>
                 <option>Price - Lowest to Highest</option>
                 <option>Price - Highest to Lowest</option>
@@ -120,7 +111,7 @@ const Loading = () => {
             </div>
             
             
-            <div className="col-4 ">
+            <div class="col-4 ">
                 <AddProduct />
             </div>
             
