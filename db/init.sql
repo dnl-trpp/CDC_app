@@ -30,7 +30,7 @@ INSERT INTO order_items(id, order_id, product_id, quantity, price) VALUES (1,1,2
 
 DROP TABLE IF EXISTS cart;
 CREATE TABLE cart (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `user_id` int DEFAULT NULL,
   `product_id` int DEFAULT NULL,
   `quantity` int DEFAULT NULL,
