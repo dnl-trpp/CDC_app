@@ -80,7 +80,7 @@ const WarehouseManagement = ()=>{
                             <div class="col-md-6 col-sm-12 py-3">
                               <img
                                 class="img-fluid"
-                                src={product.image}
+                                src={product.image_url}
                                 alt={product.name}
                                 width="400px"
                                 height="400px"
