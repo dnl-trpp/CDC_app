@@ -71,7 +71,7 @@ const Loading = () => {
               <div class="card text-center h-100" key={product.id}>
                 <img
                   class="card-img-top p-3"
-                  src={product.image}
+                  src={product.image_url}
                   alt="Card"
                   height={300}
                 />
