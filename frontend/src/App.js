@@ -1,11 +1,8 @@
+import React from 'react'
 import "./App.css";
-
-
 import Products from "./components/Products";
-
 import Home from "./pages/Home";
 import Merchant from "./pages/Merchant";
-
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 

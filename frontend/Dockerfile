@@ -16,6 +16,5 @@ RUN npm install react-router-dom
 RUN npm install bootstrap
 RUN npm install react-loading-skeleton
 
-
-# start app
+# start appcdc
 CMD ["npm", "start"]

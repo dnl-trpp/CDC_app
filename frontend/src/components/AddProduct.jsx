@@ -17,8 +17,7 @@ const AddProduct = () => {
    
     const handleSubmit =  (e) => {
       e.preventDefault();
-      try {
-        let res = fetch("http://localhost:8000/products", {
+          fetch("http://localhost:8000/products", {
           method: "POST",
           
           body: JSON.stringify({
@@ -28,26 +27,18 @@ const AddProduct = () => {
             price: price,
             stock: stock,
             image_url: image_url,
-          }),
-        });
-        res.json();
-        if (res.status === 200) {
-          setName("");
-          setDescription("");
-          setCategory("");
-          setPrice("");
-          setStock("");
-          setImageUrl("");
-          setMessage("Product added successfully");
-          
-        } else{
-          setMessage("Some error occured");
-        }
-
-      } 
-      catch (err) {
-        console.log(err);
-      }
+          })
+        })
+        .then(response => response.json())
+        .then(setName(""))
+        .then(setDescription(""))
+        .then(setCategory(""))
+        .then(setPrice(""))
+        .then(setStock(""))
+        .then(setImageUrl(""))
+        .then(setMessage("Product Added"))
+        .catch(error => console.log(error))
+        window.location.reload();//perchè volevo che al click aggiornasse la pagina per visualizzare il nuovo prodotto
     };
 
 
