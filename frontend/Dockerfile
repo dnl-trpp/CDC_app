@@ -15,6 +15,7 @@ RUN npm install react-scripts@5.0.1 -g --silent
 RUN npm install react-router-dom
 RUN npm install bootstrap
 RUN npm install react-loading-skeleton
+RUN npm install --save font-awesome
 
 # start appcdc
 CMD ["npm", "start"]
