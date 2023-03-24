@@ -32,7 +32,7 @@ const Navbar = () => {
                    
                     <Login/>
                     <Registration/>
-                    <NavLink to="/cart" class="btn btn-outline-dark m-2"><i class="fa fa-shopping-cart mr-1"></i> Cart </NavLink>
+                    <NavLink to="/cart" className="btn btn-outline-dark m-2"><i class="fa fa-shopping-cart mr-1"></i> Cart </NavLink>
                     
                     
                 </div>
