@@ -7,7 +7,7 @@ const Footer = () => {
         <div class="d-flex align-items-center justify-content-center pb-5">
           <div class="col-md-6">
             <p class="mb-3 mb-md-0">Made by {" "}
-              <a class="text-decoration-underline text-dark fs-5">CDC</a>
+              <a class="text-decoration-underline text-dark fs-5" href="/">CDC</a>
             </p>
             <a class="text-dark fs-4" href="/">
               <i class="fa fa-github"></i>

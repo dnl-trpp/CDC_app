@@ -6,3 +6,5 @@ export { default as NavbarMerchant } from './NavbarMerchant';
 export { default as AddProduct } from './AddProduct';
 export { default as WarehouseManagement } from './WarehouseManagement';
 export { default as Footer } from './Footer';
+export { default as Login } from './Login';
+export { default as Registration } from './Registration';

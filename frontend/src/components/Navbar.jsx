@@ -1,9 +1,12 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import Login from './Login'
+import Registration from './Registration'
 
 
 const Navbar = () => {
     return (
+        <>
         <nav class="navbar navbar-expand-lg navbar-light bg-light py-3 sticky-top">
             <div class="container">
                 <NavLink className="navbar-brand fw-bold fs-4 px-2" to="/"> CDC SHOP</NavLink>
@@ -26,16 +29,19 @@ const Navbar = () => {
                             <NavLink className="nav-link" to="/contact">Contact</NavLink>
                         </li>
                     </ul>
-                    <div class="buttons text-center">
-                        <NavLink to="/login" className="btn btn-outline-dark m-2"><i class="fa fa-sign-in mr-1"></i> Login</NavLink>
-                        <NavLink to="/register" className="btn btn-outline-dark m-2"><i class="fa fa-user-plus mr-1"></i> Register</NavLink>
-                        <NavLink to="/cart" className="btn btn-outline-dark m-2"><i class="fa fa-shopping-cart mr-1"></i> Cart </NavLink>
-                    </div>
+                   
+                    <Login/>
+                    <Registration/>
+                    <NavLink to="/cart" class="btn btn-outline-dark m-2"><i class="fa fa-shopping-cart mr-1"></i> Cart </NavLink>
+                    
+                    
                 </div>
-
-
+               
             </div>
+            
         </nav>
+        
+    </>
     )
 }
 
