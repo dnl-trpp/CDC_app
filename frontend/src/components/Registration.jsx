@@ -44,7 +44,7 @@ const Registration = () => {
       
       <>
       
-      <button type="button" class="btn btn-outline-dark m-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <button type="button" class="btn btn-outline-dark m-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
         <i class="fa fa-user-plus m-1"></i> 
         Register
       </button>

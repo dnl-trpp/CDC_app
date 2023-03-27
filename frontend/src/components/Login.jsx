@@ -41,7 +41,7 @@ const Login = () => {
       
       <>
         
-        <button type="button" class="btn btn-outline-dark m-3" data-bs-toggle="modal" data-bs-target="#myModal">
+        <button type="button" class="btn btn-outline-dark m-2" data-bs-toggle="modal" data-bs-target="#myModal">
             <i class="fa fa-sign-in m-1"></i> 
           Login
         </button>
