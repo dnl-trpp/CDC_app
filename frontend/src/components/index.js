@@ -6,3 +6,4 @@ export { default as WarehouseManagement } from './WarehouseManagement';
 export { default as Footer } from './Footer';
 export { default as Login } from './Login';
 export { default as Registration } from './Registration';
+export { default as AddCart } from './AddCart';

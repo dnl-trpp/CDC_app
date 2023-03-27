@@ -6,7 +6,8 @@ import { useEffect, useState } from "react";
 import { NavLink, Link } from 'react-router-dom'
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { Footer } from "../components";
+import { Footer, AddCart } from "../components";
+
 
 
 const ProductsPage = () => {
@@ -15,6 +16,7 @@ const ProductsPage = () => {
     const [orderBy, setOrderBy] = useState('default');
     const [name, setName] = useState('');
     const [loading] = useState(false);
+
 
 
     //fuction that uses the useEffect hook to return all products
@@ -113,6 +115,7 @@ const ProductsPage = () => {
         setName("");
 
     }
+   
 
     const Loading = () => {
         return (
@@ -173,9 +176,7 @@ const ProductsPage = () => {
                                     <Link to={"/product/" + product.id} class="btn btn-dark m-1">
                                         Buy Now
                                     </Link>
-                                    <button class="btn btn-dark m-1">
-                                        Add to Cart
-                                    </button>
+                                    <AddCart user_id={1} product_id={product.id}/>
                                 </div>
                             </div>
                         </div>
@@ -210,7 +211,7 @@ const ProductsPage = () => {
 
                     
                     <NavLink to="/account" className="btn btn-outline-dark m-2"><i class="fa fa-user m-1"></i>Account</NavLink>
-                    <NavLink to="/cart" className="btn btn-outline-dark m-2"><i class="fa fa-shopping-cart m-1"></i> Cart </NavLink>
+                    <NavLink to={"/cart/" + 1} className="btn btn-outline-dark m-2"><i class="fa fa-shopping-cart m-1"></i> Cart </NavLink>
 
                 </div>
 
