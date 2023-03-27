@@ -5,7 +5,11 @@ import { Link, useParams } from "react-router-dom";
 const Cart = () => {
     const { user_id } = useParams();
     const [productsCart, setProductsCart] = useState("");
+
+  
     const [setCartQuantity] = useState("");
+    
+
 
     useEffect(() => {
         const getProductCart = () => {

@@ -9,18 +9,27 @@ const AddCart = ({ product_id, user_id }) => {
      //function that insert product into cart
     const handleAddCart =  (e) => {
         e.preventDefault();
+        var userInfo =localStorage.getItem('auth_token');
+        if (userInfo){
+             userInfo =userInfo.slice(1,-1).replaceAll("'","").split(", ");
+        } else {
+          alert("Login First!");
+          return;
+        }
+
             fetch("http://localhost:8001/cart", {
             method: "POST",
             
+
             body: JSON.stringify({
-              user_id,
+              user_id : parseInt(userInfo[0]),
               product_id,
-              quantity: quantity,
+              quantity: quantity
             })
           })
           .then((response) => {
             if (response.status === 200) {
-              alert("Product added to cart");
+              alert("Item added to cart")
               
             }
           })

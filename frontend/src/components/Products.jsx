@@ -3,9 +3,10 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 
+
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { Navbar, Footer } from "./";
+import { Navbar, Footer ,AddCart} from "./";
 
 
 
@@ -172,9 +173,7 @@ const Products = () => {
                   <Link to={"/product/" + product.id} class="btn btn-dark m-1">
                     Buy Now
                   </Link>
-                  <button class="btn btn-dark m-1">
-                    Add to Cart
-                  </button>
+                  <AddCart user_id={1} product_id={product.id}/>
                 </div>
               </div>
             </div>
