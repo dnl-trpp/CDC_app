@@ -5,6 +5,7 @@ import { Link  } from "react-router-dom";
 
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import {Navbar,Footer} from "./";
 
 
 
@@ -104,7 +105,7 @@ const Loading = () => {
   };
   return (
     <>
-    
+      <Navbar />
       <div class="container my-3 py-3">
         <div class="row">
           <div class="col-12">
@@ -117,6 +118,7 @@ const Loading = () => {
           {loading ? <Loading /> : <ShowProducts />}
         </div>
       </div>
+      <Footer/>
     </>
   );
 };

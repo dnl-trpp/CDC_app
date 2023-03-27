@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { NavLink, Link } from 'react-router-dom'
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import AddProduct from "./AddProduct";
+import {AddProduct} from "../components";
 
 
 const Merchant = () => {

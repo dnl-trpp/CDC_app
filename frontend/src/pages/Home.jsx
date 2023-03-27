@@ -1,12 +1,11 @@
 import React from "react";
-import { Navbar, Main, Products, Footer} from "../components";
+import { Navbar, Main, Footer} from "../components";
 
 function Home() {
   return (
     <>
       <Navbar />
       <Main />
-      <Products />
       <Footer />
     
     </>

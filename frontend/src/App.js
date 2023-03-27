@@ -1,12 +1,12 @@
 import React from 'react'
 import "./App.css";
 
-import WarehouseManagement from "./components/WarehouseManagement";
+import {WarehouseManagement, Products} from "./components";
 import Home from "./pages/Home";
-import Merchant from './pages/Merchant';
+import MerchantPage from './pages/MerchantPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
-import ProductsPage from './pages/ProductsPage';
+import CustomerPage from './pages/CustomerPage';
 import { BrowserRouter, Routes, Route} from "react-router-dom";
 
 
@@ -27,8 +27,9 @@ function App() {
       
       <Routes>
         <Route path="/" element={<Home/>} />
-        <Route path="/merchants" element={<Merchant/>} />
-        <Route path="/products" element={<ProductsPage/>} />
+        <Route path="/merchants" element={<MerchantPage/>} />
+        <Route path="/customers" element={<CustomerPage/>} />
+        <Route path="/products" element={<Products/>} />
         <Route path="/about" element={<AboutPage/>} />
         <Route path="/contact" element={<ContactPage/>} />
         <Route path="/warehouse/:id" element={<WarehouseManagement/>} /> 
