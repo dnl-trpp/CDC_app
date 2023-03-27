@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { NavLink, Link } from 'react-router-dom'
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import {AddProduct} from "../components";
+import { AddProduct } from "../components";
 
 
 const Merchant = () => {
@@ -183,18 +183,27 @@ const Merchant = () => {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className="navbar navbar-expand-lg navbar-light bg-light py-3 sticky-top">
         <div class="container">
           <NavLink className="navbar-brand fw-bold fs-4 px-2" to="/merchants"> MERCHANT PANNEL</NavLink>
 
-          <div class="row">
+          <ul className="navbar-nav m-auto my-2 text-center">
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/">Home </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/products">Products</NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/about">About</NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/contact">Contact</NavLink>
+            </li>
+          </ul>
+          <NavLink to="/account" className="btn btn-dark m-2"><i class="fa fa-user m-1"></i>Account</NavLink>
+          <NavLink to="/cart" className="btn btn-dark m-2"><i class="fa fa-shopping-cart m-1"></i> Cart </NavLink>
 
-            <div class="input-group">
-              <input type="search" class="form-control" placeholder="Search for name" value={name} onChange={(e) => setName(e.target.value)} aria-label="Search" aria-describedby="button-addon2"></input>
-              <button class="btn btn-dark me-3" type="button" id="button-addon2" onClick={handleSearchByName}><i class="fa fa-search"></i></button>
-            </div>
-
-          </div>
 
         </div>
 
@@ -203,14 +212,22 @@ const Merchant = () => {
 
       <div class="container my-3 py-3">
         <div class="row">
-          <div class="col-4">
-            <select class="form-select m-2" value={orderBy} onChange={handleOrderPrice}>
+          <div class="col-3">
+            <select class="form-select border border-dark m-2" value={orderBy} onChange={handleOrderPrice}>
               <option value="default" selected>Sort by</option>
               <option value="ASC">Price - Lowest to Highest</option>
               <option value="DESC">Price - Highest to Lowest</option>
             </select>
           </div>
-          <div class="col-4">
+          <div class="col-3">
+            <div class="input-group m-2">
+              <input type="search" class="form-control border border-dark border-end-0" placeholder="Search for name" value={name} onChange={(e) => setName(e.target.value)} aria-label="Search" aria-describedby="button-addon2"></input>
+              <button class="btn btn-outline-dark border-start-0 me-3 pt-1" type="button" id="button-addon2" onClick={handleSearchByName}><i class="fa fa-search"></i></button>
+            </div>
+
+          </div>
+
+          <div class="col-md-6 text-end">
             <AddProduct />
           </div>
         </div>
