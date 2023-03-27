@@ -9,9 +9,8 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
 
-    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    //const [message, setMessage] = useState("");
     const navigate = useNavigate();
     
     
@@ -19,21 +18,29 @@ const Login = () => {
    
     const handleSubmit =  (e) => {
       e.preventDefault();
-      navigate('/'); 
-          /*fetch("http://localhost:8000/users", {
-          method: "GET",
-         
-        })
-        .then((response) => {
-          if (response.status === 200) {
-            //check username and passw
-            alert("Login successfully"); 
-            navigate('/')                       
-          }else{                               
-            setMessage("Incorrect credential")   <p>{handleSubmit ? message : null}</p> da inserire nell html
-          }
-        })
-        .catch(error => console.log(error))*/
+      e.preventDefault();
+  
+      fetch("http://localhost:8003/login", {
+      method: "POST",
+      
+      body: JSON.stringify({
+        email: email,
+        password: password
+        
+      })
+    })
+    .then((response) => {
+      if (response.status === 200) {
+        response.text().then(data =>localStorage.setItem('auth_token', data));
+        setEmail("");
+        setPassword("");
+        alert("User logged successfully");
+        window.location.reload();
+      } else if(response.status === 500){
+        alert("Wrong email or pasword!");
+      }
+    })
+    .catch(error => console.log(error))
     };
 
 
@@ -57,9 +64,9 @@ const Login = () => {
                 <form onSubmit={handleSubmit}>
                       <input type="hidden" name="_token" value=""></input>
                       <div class="form-group">
-                          <label class="control-label">Username</label>
+                          <label class="control-label">Email</label>
                           <div>
-                              <input type="email" class="form-control " placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)}></input>
+                              <input type="email" class="form-control " placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
                           </div>
                       </div>
                       <div class="form-group">

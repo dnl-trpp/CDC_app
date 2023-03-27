@@ -93,10 +93,10 @@ def login():
 
         cursor.close()
         db.close()
-        return "Email or Password Not Correct", 400
+        return "Email or Password Not Correct", 500
     else:
         
-        token = data['email']+ ";"+data['password']+";"
+        token = str(rv[0])
         
         
         cursor.close()

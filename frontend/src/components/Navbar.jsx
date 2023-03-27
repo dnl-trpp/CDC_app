@@ -5,6 +5,11 @@ import Registration from './Registration'
 
 
 const Navbar = () => {
+    var userInfo =localStorage.getItem('auth_token');
+    if (userInfo){
+         userInfo =userInfo.slice(1,-1).replaceAll("'","").split(", ");
+    }
+
     return (
         <>
         <nav class="navbar navbar-expand-lg navbar-light bg-light py-3 sticky-top">
@@ -26,8 +31,7 @@ const Navbar = () => {
                         </li>
                     </ul>
                    
-                    <Login/>
-                    <Registration/>
+                    {userInfo ? <div>Benvenuto {userInfo[1]}!</div> : <div><Login/><Registration/></div>}
                     <NavLink to="/cart" className="btn btn-outline-dark m-2"><i class="fa fa-shopping-cart m-1"></i> Cart </NavLink>
                     
                     

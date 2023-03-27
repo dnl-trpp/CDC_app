@@ -15,15 +15,15 @@ const Registration = () => {
    
     const handleSubmit =  (e) => {
       e.preventDefault();
-      console.log("ciao");
-
-          /*fetch("http://localhost:8000/users", {
+  
+          fetch("http://localhost:8003/register", {
           method: "POST",
           
           body: JSON.stringify({
             name: name,
             email: email,
             password: password,
+            phone : "111111111"
             
           })
         })
@@ -34,9 +34,11 @@ const Registration = () => {
             setPassword("");
             alert("User added successfully");
             window.location.reload();
+          } else if(response.status === 500){
+            alert("User already exists!");
           }
         })
-        .catch(error => console.log(error))*/
+        .catch(error => console.log(error))
     };
 
 
