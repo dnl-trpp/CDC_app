@@ -17,6 +17,12 @@ services:
     ports:
       - 8002:8000
 
+  auth_api:
+    build: ./auth_api
+    hostname: auth_api
+    ports:
+      - 8003:8000
+
   db:
    image: mysql:5.7
    hostname: db

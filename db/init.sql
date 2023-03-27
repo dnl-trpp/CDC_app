@@ -3,7 +3,7 @@ USE CDC;
 
 DROP TABLE IF EXISTS users;
 CREATE TABLE users (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` text,
   `email` text,
   `phone` text,
