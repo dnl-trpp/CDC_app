@@ -4,7 +4,7 @@ import { useState } from "react";
 const AddCart = ({ product_id, user_id }) => {
 
     
-    const [quantity, setQuantity] = useState(1);
+    const [quantity] = useState(1);
 
      //function that insert product into cart
     const handleAddCart =  (e) => {

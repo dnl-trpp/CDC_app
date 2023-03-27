@@ -6,7 +6,6 @@ import Home from "./pages/Home";
 import MerchantPage from './pages/MerchantPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
-import CustomerPage from './pages/CustomerPage';
 import Cart from './pages/Cart';
 import { BrowserRouter, Routes, Route} from "react-router-dom";
 
@@ -29,7 +28,6 @@ function App() {
       <Routes>
         <Route path="/" element={<Home/>} />
         <Route path="/merchants" element={<MerchantPage/>} />
-        <Route path="/customers" element={<CustomerPage/>} />
         <Route path="/products" element={<Products/>} />
         <Route path="/about" element={<AboutPage/>} />
         <Route path="/contact" element={<ContactPage/>} />
