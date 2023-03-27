@@ -51,7 +51,7 @@ const AddProduct = () => {
       
       <>
       
-      <button type="button" class="btn btn-dark m-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <button type="button" class="btn btn-dark m-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Add Product
       </button>
 

@@ -1,14 +1,12 @@
 import React from "react";
-import {NavbarMerchant, ProductsMerchant} from "../components";
+import {MerchantPannel} from "../components";
 
 
 function Merchant() {
   return (
     <>
-      <NavbarMerchant />
-      <ProductsMerchant />
+      <MerchantPannel />
       
-    
     </>
   )
 }
