@@ -63,9 +63,14 @@ There are basically three entities in the system:
 </div>
 
 ## DB Structure
-***order_items***:
-| ***id*** | order_id | product_id | quantity | price |
+
+***users***:
+| ***id*** | name | email | phone | password |
 | --- | --- | --- | --- | --- |
+
+***cart***:
+| ***id*** | order_id | product_id | quantity |
+| --- | --- | --- | --- |
 
 ***orders***:
 | ***id*** | date | customer_name | customer_email | customer_phone | total_price | paid | status |
