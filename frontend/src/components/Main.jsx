@@ -13,7 +13,7 @@ const Home = () => {
   useEffect(() => {
     const getProducts = () => {
 
-      fetch('http://localhost:8000/products', {
+      fetch('http://localhost:8000/products?orderby=DESC&limit=3', {
         'methods': 'GET',
         headers: {
           'Content-Type': 'application/json'
@@ -118,7 +118,7 @@ const Home = () => {
         <div class="row">
           <div class="col-12">
 
-            <h2 class="display-5 text-center">Products</h2>
+            <h2 class="display-5 text-center">Our Best Seller</h2>
             <hr />
           </div>
         </div>
