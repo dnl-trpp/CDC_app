@@ -33,7 +33,7 @@ const Navbar = () => {
                     </ul>
                    
                     {userInfo ? <div>Benvenuto {userInfo[1]}! <NavLink to="/account" className="btn btn-outline-dark m-2"><i class="fa fa-user m-1"></i>Account</NavLink>
-                    <NavLink to={"/cart/"+userInfo[0]} className="btn btn-outline-dark m-2"><i class="fa fa-shopping-cart m-1"></i> Cart </NavLink>
+                    <NavLink to={"/cart/"+ userInfo[0]} className="btn btn-outline-dark m-2"><i class="fa fa-shopping-cart m-1"></i> Cart </NavLink>
                     </div> 
                     : <div><Login/><Registration/></div>}
                     

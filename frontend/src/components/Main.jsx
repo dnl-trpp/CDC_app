@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Link  } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import {AddCart} from "./"
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -84,11 +85,9 @@ const Home = () => {
                 </ul>
                 <div class="card-body">
                   <Link to={"/product/" + product.id} class="btn btn-dark m-1">
-                    Buy Now
+                    Details
                   </Link>
-                  <button class="btn btn-dark m-1">
-                    Add to Cart
-                  </button>
+                  <AddCart product_id={product.id}/> 
                 </div>
               </div>
             </div>

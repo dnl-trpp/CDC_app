@@ -3,16 +3,16 @@ import { Footer, Navbar } from "../components";
 import { Link, useParams } from "react-router-dom";
 
 const Cart = () => {
-    const { user_id } = useParams();
-    const [productsCart, setProductsCart] = useState("");
+    const {user_id} = useParams();
 
-  
-    const [setCartQuantity] = useState("");
-    
+    const [productsCart, setProductsCart] = useState("");
+    const [cart, setCart] = useState("");
+
+
 
 
     useEffect(() => {
-        const getProductCart = () => {
+        const getProductsCart = () => {
             fetch(`http://localhost:8001/cart?user_id=${user_id}`, {
 
                 'methods': 'GET',
@@ -24,25 +24,39 @@ const Cart = () => {
                 })
 
         };
-        getProductCart();
+        getProductsCart();
     }, [user_id]);
 
+   
 
-    const handleDeleteProductCart = (product) => {
 
-        fetch(`http://localhost:8001/cart?user_id=${user_id}&product_id=${product.id}`, {
-            method: "DELETE", 
-          })
+ const DeleteProductCart =  (product_id) => {
+       
+        console.log(product_id);
+        fetch(`http://localhost:8001/cart?user_id=${user_id}&product_id=${product_id}`, {
+            method: "DELETE",
+        })
+
             .then((response) => {
-              if (response.status === 200) {
-                  setCartQuantity(product.quantity - 1);
-                  alert("Product deleted from cart successfully"); 
-              }
+                if (response.status === 200) {
+                    setProductsCart(productsCart.filter(product => product.id !== product_id));
+                    setCart(cart.map(product => {
+                        if (product.id === product_id) {
+                            return {
+                                ...product,
+                                quantity: product.quantity - 1
+                            };
+                        } else {
+                            return product;
+                        }
+                    }));
+                    alert("Product deleted from cart successfully");
+                    window.location.reload();
+                }
             })
             .catch((error) => console.log(error));
-        
-      
-      };
+
+    }
 
 
 
@@ -73,6 +87,7 @@ const Cart = () => {
         });
 
         productsCart.map((item) => {
+
             return (totalItems += item.qty);
         });
 
@@ -116,11 +131,8 @@ const Cart = () => {
                                                                 className="d-flex mb-4"
                                                                 style={{ maxWidth: "300px" }}
                                                             >
-                                                                <button
-                                                                    className="btn px-3"
-                                                                    onClick={handleDeleteProductCart}
+                                                                <button className="btn px-3" value={product.id} onClick={DeleteProductCart}>
 
-                                                                >
                                                                     <i className="fa fa-minus"></i>
                                                                 </button>
 
