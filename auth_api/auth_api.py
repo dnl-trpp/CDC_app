@@ -46,8 +46,8 @@ def register():
     rv = cursor.fetchall()
 
     if len(rv) == 0: #Utente non esiste
-        query = """INSERT INTO users (name,email,phone,password) 
-        VALUES ('{name}', '{email}', '{phone}','{password}')""".format(
+        query = """INSERT INTO users (name,email,phone,password,role) 
+        VALUES ('{name}', '{email}', '{phone}','{password}','u')""".format(
             name = data['name'], 
             email = data['email'],
             phone = data['phone'],

@@ -30,6 +30,11 @@ const Navbar = () => {
                         <li classname="nav-item">
                             <NavLink className="nav-link" to="/contact">Contact</NavLink>
                         </li>
+                        {userInfo && userInfo[5]==='a' ?   <li classname="nav-item">
+                            <NavLink className="nav-link" to="/merchants">Merchant Panel</NavLink>
+                        </li> :
+                        <li></li>
+                        }
                     </ul>
                    
                     {userInfo ? <div>Benvenuto {userInfo[1]}! <NavLink to="/account" className="btn btn-outline-dark m-2"><i class="fa fa-user m-1"></i>Account</NavLink>
