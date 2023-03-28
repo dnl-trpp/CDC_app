@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { NavLink, Link } from 'react-router-dom'
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { AddProduct } from "../components";
+import { AddProduct,Login,Registration } from "../components";
 
 
 const Merchant = () => {
@@ -180,7 +180,12 @@ const Merchant = () => {
     );
   };
 
+  var userInfo =localStorage.getItem('auth_token');
+  if (userInfo){
+       userInfo =userInfo.slice(1,-1).replaceAll("'","").split(", ");
+  }
 
+  console.log(userInfo);
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light py-3 sticky-top">
@@ -204,7 +209,10 @@ const Merchant = () => {
                             <NavLink className="nav-link" to="/merchants">Merchant Panel</NavLink>
                         </li>
           </ul>
-
+          {userInfo ? <div>Benvenuto {userInfo[1]}! <NavLink to="/account" className="btn btn-outline-dark m-2"><i class="fa fa-user m-1"></i>Account</NavLink>
+                    <NavLink to={"/cart/"+userInfo[0]} className="btn btn-outline-dark m-2"><i class="fa fa-shopping-cart m-1"></i> Cart </NavLink>
+                    </div> 
+                    : <div><Login/><Registration/></div>}
 
 
         </div>
