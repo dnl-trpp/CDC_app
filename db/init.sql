@@ -8,10 +8,11 @@ CREATE TABLE users (
   `email` text,
   `phone` text,
   `password` text,
+  `role` text,
   PRIMARY KEY (`id`)
 );
 
-INSERT INTO users(id, name, email, phone, password) VALUES (1,'John Doe','johndoe@gmail.com','555-1234','passwd'),(2,'Jane Smith','janesmith@gmail.com','555-5678','passwd'),(3,'Bob Johnson','bobjohnson@yahoo.com','555-2468','passwd'),(4,'Alice Lee','alicelee@hotmail.com','555-7890','pass');
+INSERT INTO users(id, name, email, phone, password,role) VALUES (1,'John Doe','johndoe@gmail.com','555-1234','passwd','u'),(2,'Jane Smith','janesmith@gmail.com','555-5678','passwd','u'),(3,'Bob Johnson','bobjohnson@yahoo.com','555-2468','passwd','u'),(4,'Alice Lee','alicelee@hotmail.com','555-7890','pass','u'),(5,'admin','admin@cdc.it','555-1234','admin','a');
 
 
 DROP TABLE IF EXISTS order_items;

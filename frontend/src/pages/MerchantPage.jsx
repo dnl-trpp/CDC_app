@@ -200,9 +200,11 @@ const Merchant = () => {
             <li className="nav-item">
               <NavLink className="nav-link" to="/contact">Contact</NavLink>
             </li>
+            <li classname="nav-item">
+                            <NavLink className="nav-link" to="/merchants">Merchant Panel</NavLink>
+                        </li>
           </ul>
-          <NavLink to="/account" className="btn btn-dark m-2"><i class="fa fa-user m-1"></i>Account</NavLink>
-          <NavLink to="/cart" className="btn btn-dark m-2"><i class="fa fa-shopping-cart m-1"></i> Cart </NavLink>
+
 
 
         </div>
