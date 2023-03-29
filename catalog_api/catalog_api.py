@@ -24,7 +24,7 @@ def cart():
     if "user_id" not  in args:
         return "Bad Request", 400
     
-    query = """	SELECT p.name, p.description,p.category,p.price, p.image_url, c.quantity 
+    query = """	SELECT p.id,p.name, p.description,p.category,p.price, p.image_url, c.quantity 
 	FROM cart c JOIN users u ON c.user_id = u.id JOIN products p ON p.id = c.product_id
 	WHERE u.id = {id};""".format(id=args['user_id'])
     
