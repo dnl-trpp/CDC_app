@@ -182,7 +182,7 @@ const ShowCart = () => {
                                                             className="d-flex mb-4"
                                                             style={{ maxWidth: "300px" }}
                                                         >
-                                                            <button className="btn px-3"  quantity = {product.quantity} onClick={(product) => {
+                                                            <button className="btn px-3"  id={product.id} quantity = {product.quantity} onClick={(product) => {
                                                                 var quantityCart = parseInt(product.target.getAttribute("quantity")) - 1
                                                                 DecrementQuantity(product.target.id, quantityCart)
 
