@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect} from "react";
 import { Footer, Navbar } from "../components";
 import { Link, useParams } from "react-router-dom";
 
@@ -6,7 +6,7 @@ const Cart = () => {
     const { user_id } = useParams();
 
     const [productsCart, setProductsCart] = useState("");
- 
+   
     
 
 
@@ -28,7 +28,7 @@ const Cart = () => {
 
 
 
-    const handleDeleteFromCart = (product_id) => {
+    function handleDeleteFromCart(product_id){
 
 
         fetch(`http://localhost:8001/cart?user_id=${user_id}&product_id=${product_id}`, {
@@ -49,18 +49,9 @@ const Cart = () => {
 
     
 
-   const IncrementQuantity = (product_id) => {
+   const IncrementQuantity = (product_id,quantityCart) => {
     
-        
-        var currentQuantity = null;
-        productsCart.forEach(element => {
-            console.log(element.id);
-            console.log(product_id);
-            
-            if(element.id == product_id) currentQuantity=element.quantity;
-        });
 
-        console.log(currentQuantity);
         fetch("http://localhost:8001/cart", {
 
             method: "POST",
@@ -69,12 +60,13 @@ const Cart = () => {
             body: JSON.stringify({
                 user_id,
                 product_id,
-                quantity: currentQuantity + 1
+                quantity: quantityCart
             })
         })
         .then((response) => {
             if (response.status === 200) {
-                //setQuantity(quantity + 1)
+                response.json()
+                setProductsCart(response)
                 window.location.reload()
                 console.log("quantity updated")
 
@@ -84,29 +76,39 @@ const Cart = () => {
    
 }
 
-const DecrementQuantity = (product_id,currentQuantity) => {
+const DecrementQuantity = (product_id,quantityCart) => {
     
+    if (quantityCart >= 1){
+
+        fetch("http://localhost:8001/cart", {
+
+        method: "POST",
 
 
-    fetch("http://localhost:8001/cart", {
-
-            method: "POST",
-
-
-            body: JSON.stringify({
-                user_id,
-                product_id,
-                quantity: currentQuantity - 1
-            })
+        body: JSON.stringify({
+            user_id,
+            product_id,
+            quantity: quantityCart
         })
-            .then((response) => {
-                if (response.status === 200) {
-                    window.location.reload()
-                    console.log("quantity updated")
+    })
+    .then((response) => {
+        if (response.status === 200) {
+            response.json()
+            setProductsCart(response)
+            window.location.reload()
+            console.log("quantity updated")
 
-                }
-            })
-            .catch(error => console.log(error))
+        }
+    })
+    .catch(error => console.log(error))
+
+
+    }else{
+        handleDeleteFromCart(product_id);
+    }
+
+       
+   
 }
 
 const EmptyCart = () => {
@@ -180,29 +182,29 @@ const ShowCart = () => {
                                                             className="d-flex mb-4"
                                                             style={{ maxWidth: "300px" }}
                                                         >
-                                                            <button className="btn px-3" id={product.id} onClick={(e) => {
-                                                                var productid = e.target.id;
-                                                                var currentQuantity = null;
-                                                                productsCart.forEach(element => {
-                                                    
-                                                                    
-                                                                    if(element.id == productid) currentQuantity=element.quantity;
-                                                                });
-                                                                //prendere la qty
-                                                                currentQuantity > 1 ? DecrementQuantity(productid,currentQuantity) : handleDeleteFromCart(productid)
+                                                            <button className="btn px-3"  quantity = {product.quantity} onClick={(product) => {
+                                                                var quantityCart = parseInt(product.target.getAttribute("quantity")) - 1
+                                                                DecrementQuantity(product.target.id, quantityCart)
 
                                                             }} >
 
-                                                                <i className="fa fa-minus" ></i>
+                                                                <i className="fa fa-minus" quantity={product.quantity} id={product.id}></i>
                                                             </button>
 
                                                             <p className="mx-5" quantity={product.quantity}>{product.quantity}</p>
 
                                                             <button id={product.id}
                                                                 className="btn px-3"
-                                                                onClick={(product) => IncrementQuantity(product.target.id)}>
+                                                                quantity = {product.quantity}
+                                                                onClick={(product) => {
+                                                                    //console.log(product)
+                                                                    //console.log(product.target.getAttribute("quantity"))
+                                                                    //console.log(product.target.id)
+                                                                    var quantityCart = parseInt(product.target.getAttribute("quantity")) + 1
+                                                                    //console.log("quantityCart:"+ quantityCart + 1)
+                                                                    IncrementQuantity(product.target.id, quantityCart)}}>
 
-                                                                <i className="fa fa-plus"></i>
+                                                                <i className="fa fa-plus" quantity={product.quantity} id={product.id}></i>
                                                             </button>
                                                         </div>
 
