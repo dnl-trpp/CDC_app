@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect} from "react";
 import { Footer, Navbar } from "../components";
 import { Link, useParams } from "react-router-dom";
 
@@ -6,7 +6,7 @@ const Cart = () => {
     const { user_id } = useParams();
 
     const [productsCart, setProductsCart] = useState("");
-    const [quantity,setQuantity] = useState(1)
+   
     
 
 
@@ -28,7 +28,7 @@ const Cart = () => {
 
 
 
-    const handleDeleteFromCart = (product_id) => {
+    function handleDeleteFromCart(product_id){
 
 
         fetch(`http://localhost:8001/cart?user_id=${user_id}&product_id=${product_id}`, {
@@ -49,9 +49,8 @@ const Cart = () => {
 
     
 
-   const IncrementQuantity = (product_id) => {
+   const IncrementQuantity = (product_id,quantityCart) => {
     
-    setQuantity(quantity + 1);
 
         fetch("http://localhost:8001/cart", {
 
@@ -61,13 +60,14 @@ const Cart = () => {
             body: JSON.stringify({
                 user_id,
                 product_id,
-                quantity: quantity + 1
+                quantity: quantityCart
             })
         })
         .then((response) => {
             if (response.status === 200) {
-                //setQuantity(quantity + 1)
-                //window.location.reload()
+                response.json()
+                setProductsCart(response)
+                window.location.reload()
                 console.log("quantity updated")
 
             }
@@ -76,28 +76,39 @@ const Cart = () => {
    
 }
 
-const DecrementQuantity = (product_id) => {
+const DecrementQuantity = (product_id,quantityCart) => {
     
-    fetch("http://localhost:8001/cart", {
+    if (quantityCart >= 1){
 
-            method: "POST",
+        fetch("http://localhost:8001/cart", {
+
+        method: "POST",
 
 
-            body: JSON.stringify({
-                user_id,
-                product_id,
-                quantity: quantity - 1
-            })
+        body: JSON.stringify({
+            user_id,
+            product_id,
+            quantity: quantityCart
         })
-            .then((response) => {
-                if (response.status === 200) {
-                    setQuantity(quantity - 1)
-                    //window.location.reload()
-                    console.log("quantity updated")
+    })
+    .then((response) => {
+        if (response.status === 200) {
+            response.json()
+            setProductsCart(response)
+            window.location.reload()
+            console.log("quantity updated")
 
-                }
-            })
-            .catch(error => console.log(error))
+        }
+    })
+    .catch(error => console.log(error))
+
+
+    }else{
+        handleDeleteFromCart(product_id);
+    }
+
+       
+   
 }
 
 const EmptyCart = () => {
@@ -171,25 +182,29 @@ const ShowCart = () => {
                                                             className="d-flex mb-4"
                                                             style={{ maxWidth: "300px" }}
                                                         >
-                                                            <button className="btn px-3" onClick={(product) => {
-                                                                console.log(product)
-                                                                var quantityObject = product.target.parentNode.nextSibiling
-                                                                quantityObject ? quantityObject = parseInt(quantityObject.innerText) : quantityObject = 0
-                                                                //prendere la qty
-                                                                quantityObject > 1 ? DecrementQuantity(product.target.id) : handleDeleteFromCart(product.target.id)
+                                                            <button className="btn px-3"  quantity = {product.quantity} onClick={(product) => {
+                                                                var quantityCart = parseInt(product.target.getAttribute("quantity")) - 1
+                                                                DecrementQuantity(product.target.id, quantityCart)
 
                                                             }} >
 
-                                                                <i className="fa fa-minus" id={product.id}></i>
+                                                                <i className="fa fa-minus" quantity={product.quantity} id={product.id}></i>
                                                             </button>
 
                                                             <p className="mx-5" quantity={product.quantity}>{product.quantity}</p>
 
                                                             <button
                                                                 className="btn px-3"
-                                                                onClick={(product) => IncrementQuantity(product.target.id)}>
+                                                                quantity = {product.quantity}
+                                                                onClick={(product) => {
+                                                                    //console.log(product)
+                                                                    //console.log(product.target.getAttribute("quantity"))
+                                                                    //console.log(product.target.id)
+                                                                    var quantityCart = parseInt(product.target.getAttribute("quantity")) + 1
+                                                                    //console.log("quantityCart:"+ quantityCart + 1)
+                                                                    IncrementQuantity(product.target.id, quantityCart)}}>
 
-                                                                <i className="fa fa-plus" id={product.id}></i>
+                                                                <i className="fa fa-plus" quantity={product.quantity} id={product.id}></i>
                                                             </button>
                                                         </div>
 
