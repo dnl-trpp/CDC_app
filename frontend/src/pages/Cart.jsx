@@ -6,7 +6,7 @@ const Cart = () => {
     const { user_id } = useParams();
 
     const [productsCart, setProductsCart] = useState("");
-    const [quantity,setQuantity] = useState(1)
+ 
     
 
 
@@ -51,8 +51,16 @@ const Cart = () => {
 
    const IncrementQuantity = (product_id) => {
     
-    setQuantity(quantity + 1);
+        
+        var currentQuantity = null;
+        productsCart.forEach(element => {
+            console.log(element.id);
+            console.log(product_id);
+            
+            if(element.id == product_id) currentQuantity=element.quantity;
+        });
 
+        console.log(currentQuantity);
         fetch("http://localhost:8001/cart", {
 
             method: "POST",
@@ -61,13 +69,13 @@ const Cart = () => {
             body: JSON.stringify({
                 user_id,
                 product_id,
-                quantity: quantity + 1
+                quantity: currentQuantity + 1
             })
         })
         .then((response) => {
             if (response.status === 200) {
                 //setQuantity(quantity + 1)
-                //window.location.reload()
+                window.location.reload()
                 console.log("quantity updated")
 
             }
@@ -76,8 +84,10 @@ const Cart = () => {
    
 }
 
-const DecrementQuantity = (product_id) => {
+const DecrementQuantity = (product_id,currentQuantity) => {
     
+
+
     fetch("http://localhost:8001/cart", {
 
             method: "POST",
@@ -86,13 +96,12 @@ const DecrementQuantity = (product_id) => {
             body: JSON.stringify({
                 user_id,
                 product_id,
-                quantity: quantity - 1
+                quantity: currentQuantity - 1
             })
         })
             .then((response) => {
                 if (response.status === 200) {
-                    setQuantity(quantity - 1)
-                    //window.location.reload()
+                    window.location.reload()
                     console.log("quantity updated")
 
                 }
@@ -171,25 +180,29 @@ const ShowCart = () => {
                                                             className="d-flex mb-4"
                                                             style={{ maxWidth: "300px" }}
                                                         >
-                                                            <button className="btn px-3" onClick={(product) => {
-                                                                console.log(product)
-                                                                var quantityObject = product.target.parentNode.nextSibiling
-                                                                quantityObject ? quantityObject = parseInt(quantityObject.innerText) : quantityObject = 0
+                                                            <button className="btn px-3" id={product.id} onClick={(e) => {
+                                                                var productid = e.target.id;
+                                                                var currentQuantity = null;
+                                                                productsCart.forEach(element => {
+                                                    
+                                                                    
+                                                                    if(element.id == productid) currentQuantity=element.quantity;
+                                                                });
                                                                 //prendere la qty
-                                                                quantityObject > 1 ? DecrementQuantity(product.target.id) : handleDeleteFromCart(product.target.id)
+                                                                currentQuantity > 1 ? DecrementQuantity(productid,currentQuantity) : handleDeleteFromCart(productid)
 
                                                             }} >
 
-                                                                <i className="fa fa-minus" id={product.id}></i>
+                                                                <i className="fa fa-minus" ></i>
                                                             </button>
 
                                                             <p className="mx-5" quantity={product.quantity}>{product.quantity}</p>
 
-                                                            <button
+                                                            <button id={product.id}
                                                                 className="btn px-3"
                                                                 onClick={(product) => IncrementQuantity(product.target.id)}>
 
-                                                                <i className="fa fa-plus" id={product.id}></i>
+                                                                <i className="fa fa-plus"></i>
                                                             </button>
                                                         </div>
 
