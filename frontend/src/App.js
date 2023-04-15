@@ -1,7 +1,7 @@
 import React from 'react'
 import "./App.css";
 
-import {WarehouseManagement, Products} from "./components";
+import {WarehouseManagement, Products, ProductDetails,Account} from "./components";
 import Home from "./pages/Home";
 import MerchantPage from './pages/MerchantPage';
 import AboutPage from './pages/AboutPage';
@@ -29,10 +29,12 @@ function App() {
         <Route path="/" element={<Home/>} />
         <Route path="/merchants" element={<MerchantPage/>} />
         <Route path="/products" element={<Products/>} />
+        <Route path="/product/:id" element={<ProductDetails/>} />
         <Route path="/about" element={<AboutPage/>} />
         <Route path="/contact" element={<ContactPage/>} />
         <Route path="/warehouse/:id" element={<WarehouseManagement/>} />
         <Route path="/cart/:user_id" element={<Cart/>} />
+        <Route path="/account" element={<Account/>} />
         
       </Routes>
     

@@ -171,9 +171,9 @@ const Products = () => {
                 </ul>
                 <div class="card-body">
                   <Link to={"/product/" + product.id} class="btn btn-dark m-1">
-                    Buy Now
+                    Details
                   </Link>
-                  <AddCart user_id={1} product_id={product.id}/>
+                  <AddCart product_id={product.id}/>
                 </div>
               </div>
             </div>
